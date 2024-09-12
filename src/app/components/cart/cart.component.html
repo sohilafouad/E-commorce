@@ -1,0 +1,38 @@
+<section class="bg-main-light my-4 p-3 shadow rounded-4 w-75 mx-auto">
+@if(cartDetails.totalCartPrice !==0 ){
+    <div class="d-flex justify-content-between align-items-center ">
+        <h1 class="h2 text-center fw-bolder "> Your shop Cart: </h1>
+        <!-- <button class="btn btn-outline-danger"  (click)="clearItems()">Clear Cart</button> -->
+        <button (click)="confirmBox()" class="btn btn-outline-danger">Clear Cart</button>
+       </div>
+        <p class="text-main fw-bold">total price : {{cartDetails.totalCartPrice | currency :"GBP"}}</p>
+     
+     @for (item of cartDetails.products; track item.product.id) {
+        <div class="row mb-1 border border-3 rounded-3">
+            <!-- img -->
+                <div class="col-md-1">
+                    <div>
+                        <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+                    </div>
+                </div>
+    
+        <!-- data -->
+                <div class="col-md-11 d-flex align-items-center justify-content-between">
+                    <div>
+                        <h3 class="h5 pt-2">{{item.product.title}}</h3>
+                        <p class="m-0 text-main fw-bold">price : {{item.price | currency:"GBP"}}</p>
+                        <span class="text-danger fw-semibold cursor-pointer" (click)="removeItem(item.product.id)"><i class="fa-solid fa-trash-can"></i> Remove</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="fa-2x text-main cursor-pointer" (click)="updateCount(item.product.id , item.count + 1)"><i class="fa-solid fa-plus-circle"></i></span>
+                        <span> {{item.count}} </span>
+                        <span class="fa-2x text-main cursor-pointer" (click)="updateCount(item.product.id, item.count - 1 )" ><i class="fa-solid fa-minus-circle"></i></span>
+                    </div>
+                </div>
+            </div>
+     }
+     <button class="btn-main mt-2" [routerLink]="['/orders', cartDetails._id]">Online Payment</button>
+}@else{
+<h2 class="text-main text-center my-3 fw-bolder">Your Cart Is Empty</h2>
+}
+</section>

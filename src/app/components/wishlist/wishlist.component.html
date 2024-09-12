@@ -1,0 +1,46 @@
+<div class="row my-5 g-3">
+        
+        
+    @for (product of productList; track product.id) {
+        <div class="col-md-2">
+            <div class="product p-2" >
+                @if(!wishlist.includes(product.id)){
+                    <span class="heart text-main" (click)="addToWishList(product.id)"><i class="fa-regular fa-heart"></i></span>
+                  }
+                   @if(wishlist.includes(product.id)){
+                    <span class="heart text-danger"   (click)="removeFromWishList(product.id)" ><i class="fas fa-heart"></i></span>
+                   }
+              <div [routerLink]="['/details',product.id]">
+                <!-- 3mlna hena pinding 3la router link 34an ab3t el id bta3 kol product  fe el roting -->
+                <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+                <h3 class="small text-main pt-2">{{product.category.name | uppercase}}</h3>
+                <!-- est5dmna el pipe (3bara 3n function bta5od mni eldata 3la hy2t params w t3mlha transform ) -->
+                <h4 class="h6">{{product.title| term:2}}</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>{{product.price | currency:'GBP'}}</span>
+                    <!-- GBP rmz el gneh elestrelenii w lakn shbh elgneh bt3na fa 3di omork alah ybarklk -->
+                    <div>
+                        @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
+                            
+                        <span><i class="fas fa-star rating-color"></i></span>
+                        } 
+                        @if( product.ratingsAverage %1 !==0){
+                            
+                            <i class="fa-solid fa-star-half-stroke rating-color"></i>
+                        }
+                        <!-- hena bnzbt elstars  product.ratingsAverage %1 !==0 hena m3nha en lw el rate feh ksr nzhr el icon el nos de -->
+                        <span class="text-muted">{{product.ratingsAverage}}</span>
+                    </div>
+                </div>
+              </div>
+                <button class="btn-main w-100" (click)="addTocart(product.id)">Add to cart</button>
+            </div>
+    
+        </div>
+    
+    }
+    @if(  text.trim() && (productList|search:text).length===0 ){
+        <h1 class="display-1 text-center">No Data Found!</h1>
+    
+    }
+        </div>

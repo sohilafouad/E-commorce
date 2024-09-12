@@ -1,0 +1,36 @@
+<section class="bg-main-light shadow w-75 mx-auto my-3 p-3 rounded">
+    <h1 class="text-center fw-bolder py-3">ALL ORDERS</h1>
+
+
+@for (order of allOrders ; track $index) {
+    <div class=" border border-2 mb-3 p-5">
+        <h3 class="text-main  py-3 text-capitalize">orders</h3>
+      @for (cartOrder of order.cartItems; track $index) {
+        <div class="row border border-2 py-4 align-items-center">
+            <div class="col-md-1">
+               <img [src]="cartOrder.product.imageCover" [alt]="cartOrder.product.title" class="w-100">
+            </div>
+   <div class="col-md-11">
+   <div class="d-flex justify-content-between align-items-center">
+       <div >
+           <h3 class="text-main  ">{{cartOrder.product.title}}</h3>
+           <p class="text-capitalize mb-0">{{cartOrder.count}}</p>
+           <p class="text-capitalize mb-0">{{cartOrder.price | currency :"GBP"}}</p>
+       </div>
+   </div>
+   </div>
+           </div>
+      }
+      <div class="by-3 mt-4  mx-auto w-75 fw-bold ">
+        <p class="mb-0 p-1">
+            isDelivered: <span>{{order.isDelivered}}</span>
+        </p>
+        <p class="mb-0 p-1">
+            isPaid: <span>{{order.isPaid}}</span>
+        </p>
+<p class="mb-0 p-1 text-capitalize "> Payment Method : {{order.paymentMethodType}}</p>
+<p  class="mb-0 p-1 text-capitalize "> total Price: {{order.totalOrderPrice}}</p>
+      </div>
+    </div>
+}
+</section>

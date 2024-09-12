@@ -1,0 +1,16 @@
+@if(categoryDetails){
+    <section class="w-75 mx-auto rounded shadow bg-main-light p-3">
+        <div class="row align-items-center g-4">
+            <div class="col-md-6">
+         <img [src]="categoryDetails.image" [alt]="categoryDetails.name" class="w-100">
+        </div>
+        <div class="col-md-6">
+    <h2 class="h1 text-main fw-bolder">{{categoryDetails.name}}</h2>
+    <!-- <h3>{{categoryDetails.slug}}</h3>
+    <h4>{{categoryDetails.createdAt}}</h4>
+    <h5>{{categoryDetails.updatedAt}}</h5> -->
+        </div>
+        </div>
+    </section>
+    
+}
